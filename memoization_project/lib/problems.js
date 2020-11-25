@@ -43,19 +43,30 @@ function minChange(coins, amount, memo = {}) {
     // iterate per each coin to see what the subtracted amount would be
     if (amount in memo) return memo[amount]
     if (amount === 0) return 0;
+    if (amount < Math.min(...coins)) return -1
 
     let numCoins = [];
     coins.forEach((coin) => {
         if (coin <= amount) {
             numCoins.push(minChange(coins, amount - coin, memo) + 1)
+            // console.log(numCoins + 'in loop')
         }
     })
+    
+    memo[amount] = Infinity
 
-    memo[amount] = Math.min(...numCoins) // comma separated arguments
-    return memo[amount]
+    for (let i = 0; i < numCoins.length; i++) {
+        if (numCoins[i]) {
+            memo[amount] = Math.min(numCoins[i], memo[amount])
+        }
+    }
+    // comma separated arguments
+    // if (memo[amount] === 0) return -1
+    return memo[amount] === Infinity ? -1 : memo[amount]
+
 }
 
-console.log(minChange([1, 5, 10, 25], 100))
+console.log(minChange([2], 3))
 
 module.exports = {
     lucasNumberMemo,
