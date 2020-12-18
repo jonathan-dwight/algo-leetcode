@@ -115,3 +115,59 @@ const TextFormatting = (starting, ending, styles) => {
 // o(n) - space
 
 console.log(TextFormatting([1,3,9,5,9], [5,8,10,6,10], ['b', 'i', 'b', 'i', 'u']))
+
+function gameWinner(colors) {
+    // Write your code here
+    // we want to be able to check if adjacent pieces are there
+    // keep track of player
+
+    if (colors.length === 2) {
+        if (colors[0] === 'w') {
+            return 'bob';
+        } else {
+            return 'wendy';
+        }
+    }
+
+    let w = 0;
+    let b = 0;
+
+    let count = 0
+    for (let i = 0; i < colors.length; i++) {
+        count += 1
+        if (colors[i] !== colors[i + 1]) {
+            if (colors[i] === 'w') {
+                w += count - 1
+            } else {
+                b += count - 1
+            }
+            count = 0;
+        }
+    }
+
+    if (w > b) return 'wendy';
+    return 'bob';
+
+}
+
+function stockPairs(stocksProfit, target) {
+    // Write your code here
+    let countHash = {};
+    let count = 0;
+    let ids = new Set();
+    // need to check for a pair that will be repeated... 
+
+    for (let i = 0; i < stocksProfit.length; i++) {
+        if (stocksProfit[i] in countHash && stocksProfit[i] !== countHash[i]) {
+            if (ids.has(stocksProfit[i])) {
+                continue
+            } else {
+                ids.add(stocksProfit[i]);
+                count += 1;
+            }
+        } else {
+            countHash[target - stocksProfit[i]] = target - stocksProfit[i];
+        }
+    }
+    return count;
+}
