@@ -171,3 +171,44 @@ function stockPairs(stocksProfit, target) {
     }
     return count;
 }
+
+function countingDigits (arr) {
+    let countOfOnes = 0;
+    let swap = 0; // the zeros that are out of order
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === 1) countOfOnes += 1;
+        if (arr[i] === 0) swap += countOfOnes;
+    }
+
+    // need to check the other side to see if the swaps are easier
+
+    let countOfZero = arr.length - countOfOnes;
+    let reverseSwap = (countOfOnes * countOfZero) - swap
+    return Math.min(displace, reverseSwap)
+}
+
+
+// how sami solved it
+
+function countingDigits(arr) {
+    let countOfOnes = 0;
+    let swaps1s = 0; // the zeros that are out of order
+
+    let countOfZeros = 0;
+    let swaps0s = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === 1)  {
+            countOfOnes += 1;
+            swaps1s += countOfOnes;
+        } else {
+            countOfZeros += 1;
+            swaps0s += countOfZeros;        
+        };
+    }
+
+    return Math.min(swaps0s, swaps1s)
+
+    // need to check the other side to see if the swaps are easier
+}
