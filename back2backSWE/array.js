@@ -39,3 +39,79 @@ const findTwoSum = (root, A, threeSumArr) => {
         }
     }
 } 
+
+
+const enumeratePrimes = (n) => {
+    let ans = [];
+
+    for (let i = 0; i < n; i++) {
+        if (isPrime(i)) ans.push(i);
+    }
+
+    return ans;
+}
+
+const isPrime = (num) => {
+    if (num < 2) return false;
+
+    for (let i = 0; i < num; i++) {
+        if (num % i === 0) return false;
+    }
+
+    return true;
+}
+
+
+const contiguousSubstrings = (start, end) => {
+    let count = 0;
+
+    for (let i = 0; i < start.length; i++) {
+        let checkRangeMin = start[i];
+        let checkRangeMax = end[i];
+
+        for (let j = i+1; j < start.length; j++) {
+            if (start[j] > checkRangeMin && start[j] < checkRangeMax) {
+                continue;
+            } else if (end[j] < checkRangeMax && end[j] > checkRangeMin) {
+                continue;
+            } else {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+// o(n^2)
+
+
+console.log(contiguousSubstrings([1,1,6,7], [5,3,8,10]));
+
+
+const TextFormatting = (starting, ending, styles) => {
+    // have an array to hold all the values;
+    // max length of the array can be in the ending
+
+    let maxArr = Math.max(...ending) + 1;
+    let textArr = new Array(maxArr).fill('');
+    let count = 0;
+
+    for (let i = 0; i < starting.length; i++) {
+        let check = false;
+        for (let j = starting[i]; j < ending[i]+1; j++) {
+            if (textArr[j].includes(styles[i])) continue;
+            if (textArr[j] !== styles[i]) {
+                textArr[j] += styles[i]
+                check = true;
+            }
+        }
+        if (check) count += 2 
+    }
+    // console.log(textArr)
+    return count 
+}
+
+// o(n^2) - time
+// o(n) - space
+
+console.log(TextFormatting([1,3,9,5,9], [5,8,10,6,10], ['b', 'i', 'b', 'i', 'u']))
