@@ -128,19 +128,43 @@ function minChange(coins, amount) {
     table[0] = 0;
 
     //table index is going to correspond to an amount
-    coins.forEach(val => {
-        for (let amt = 0; amt < table.length; amt++) {
-            for (let qty = 0; qty * val <= amt; qty++) {
-                // this loop is for the coin value up to that amount
-                let remainder = amt - qty * val
-                let attempt = table[remainder] + qty;
-                if (attempt < table[amt]) table[amt] = attempt
-            }
+    // coins.forEach(val => {
+    //     for (let amt = 0; amt < table.length; amt++) {
+    //         for (let qty = 0; qty * val <= amt; qty++) {
+    //             // this loop is for the coin value up to that amount
+    //             let remainder = amt - qty * val
+    //             let attempt = table[remainder] + qty;
+    //             if (attempt < table[amt]) table[amt] = attempt
+    //             // this is updating the table with the minimum value
+    //         }
+    //     }
+    //     // this is not yeuhan approved
+    // })
+
+    coins.forEach(coin => {
+        for (let amtValue = coin; amtValue < table.length; amtValue++) {
+            let dpIdx = amtValue - coin;
+            let attempt = table[dpIdx] + 1; // not adding the coin value
+            if (attempt < table[amtValue]) table[amtValue] = attempt;
         }
+        console.log(table);
     })
-    return table[table.length - 1]
+    return table[amount];
 }
 
+// tabulation - construct top to bottom
+console.log(minChange([1, 2, 5], 10))
+
+// just grabbing value - iteration to grab the dp to check
+
+// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 1 
+// [0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5] 2
+// [0, 1, 1, 2, 2, 1, 2, 2, 3, 3, 2] 5
+
+// return the dp[amount] 
+
+// you are constantly checking the back of the dp
+// compare and change the index with the minimum
 
 module.exports = {
     stepper,
