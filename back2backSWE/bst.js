@@ -46,3 +46,27 @@ const Build = (nums, left, right) => {
 
     return newNode;
 }
+
+
+const lowestCommonAncestor = (root, x, y) => {
+    // have to know where it is in the binary tree
+
+    // have something like the ancestors be stored that are common?
+    // this is balanced
+    // we would know if that if one node is one the right and the left
+    // root node would be the greatest
+
+    if (x < root.val && y > root.val) return root;
+    if (root.left == null && root.right == null) return root;
+    if (x === root.val || y === root.val) return root;
+
+
+    if (x < root.val && y < root.val) {
+        return lowestCommonAncestor(root.left, x, y);
+    } else if (x > root.val && y > root.val) {
+        return lowestCommonAncestor(root.right, x, y);
+    }
+
+
+    // instead of line 16 and 18 can just return the root at the end
+}
