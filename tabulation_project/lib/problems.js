@@ -26,19 +26,19 @@ function stepper(nums, memo = {}) {
     // if number = 0.. no steps
 
     // tabulation
-    // let table = new Array(nums.length).fill(false);
-    // table[0] = true; //first position allows you to go through it
+    let table = new Array(nums.length).fill(false);
+    table[0] = true; //first position allows you to go through it
 
-    // for (let i = 0; i < nums.length; i++) {
-    //     if (table[i] === true) {
-    //         let maxRange = nums[i]; // max range
-    //         for (let j = 1; j <= maxRange; j++) {
-    //             table[j] = true;
-    //         }
-    //         // count -= 1;
-    //     }
-    // }
-    // return table[nums.length-1];
+    for (let i = 0; i < nums.length; i++) {
+        if (table[i] === true) {
+            let maxRange = nums[i]; // max range
+            for (let j = 1; j <= maxRange; j++) {
+                table[j] = true;
+            }
+            // count -= 1;
+        }
+    }
+    return table[nums.length-1];
 
     //memoization
     let key = nums.length;
@@ -157,7 +157,17 @@ console.log(minChange([1, 2, 5], 10))
 
 // just grabbing value - iteration to grab the dp to check
 
+
+
+
+
+
+
+
 // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 1 
+// [0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5] 2
+// [0, 1, 1, 2, 2, 1, 2, 2, 3, 3, 2] 10
+
 // [0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5] 2
 // [0, 1, 1, 2, 2, 1, 2, 2, 3, 3, 2] 5
 

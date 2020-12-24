@@ -212,3 +212,26 @@ function countingDigits(arr) {
 
     // need to check the other side to see if the swaps are easier
 }
+
+function groupAnagrams(words) {
+    // Write your code here.
+
+    // hash to store the count of each letter
+
+    // we can the length of the words if they match the current one
+    let checkHash = {};
+
+    for (let i = 0; i < words.length; i++) {
+        let sortString = words[i].split().sort();
+        if (sortString.join() in checkHash) {
+            checkHash[sortString].push(words[i]);
+        } else {
+            checkHash[sortString] = [words[i]];
+        }
+    }
+    return Object.values(checkHash);
+}
+
+
+// Do not edit the line below.
+exports.groupAnagrams = groupAnagrams;
