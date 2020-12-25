@@ -234,4 +234,27 @@ function groupAnagrams(words) {
 
 
 // Do not edit the line below.
-exports.groupAnagrams = groupAnagrams;
+const rotate = (matrix) => {
+
+  let size = matrix.length-1;
+
+  // do layer < matrix.length/2 because it when drawn out.. it will be the amount
+  // of layers to rotate
+  for (let layer = 0; layer < Math.floor(matrix.length / 2); layer++) {
+    for (let i = layer; i < size - layer; i++) {
+      let top = matrix[layer][i]; // top left
+      let right = matrix[i][size-layer]; // top right
+      let bottom = matrix[size-layer][size-i]; // bottom right
+      let left = matrix[size-i][layer]; // bottom right
+
+      // this is doing the swap
+      matrix[layer][i] = left;
+      matrix[i][size-layer] = top;
+      matrix[size-layer][size-i] = right;
+      matrix[size-i][layer] = bottom;
+
+    }
+
+  }
+  return matrix;
+}
