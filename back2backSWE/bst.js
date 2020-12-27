@@ -70,3 +70,12 @@ const lowestCommonAncestor = (root, x, y) => {
 
     // instead of line 16 and 18 can just return the root at the end
 }
+
+const hasPathSum = (node, targetSum) => {
+
+    if (node.val === targetSum) return 1;
+    if (!node || (node.left === null && node.right === null)) return 0;
+    return (
+        hasPathSum(node.left, targetSum - node.val) + hasPathSum(node.right, targetSum - node.val)
+    )
+}
