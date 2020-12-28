@@ -79,3 +79,21 @@ const hasPathSum = (node, targetSum) => {
         hasPathSum(node.left, targetSum - node.val) + hasPathSum(node.right, targetSum - node.val)
     )
 }
+
+const isSymmetric = (root) => {
+    if (!root) return true;
+    if (root.left === null && root.right === null) return true;
+    return symmetricHelper(root.left, root.right);
+}
+
+const symmetricHelper = (subLeft, subRight) => {
+    if (subLeft === null && subRight === null) return true;
+    // if (subLeft.val === null || subRight.val === null)return false;
+    if (subLeft.val === subRight.val &&
+        (symmetricHelper(subLeft.left, subRight.right)) &&
+        (symmetricHelper(subLeft.right, subRight.left))
+    ) {
+        return true;
+    };
+    return false;
+}
