@@ -97,3 +97,23 @@ const symmetricHelper = (subLeft, subRight) => {
     };
     return false;
 }
+
+
+const isValidBST = (root) => {
+
+    // root sets precedent for tree left - (-infitiny, 10) and right - (10, infinity)
+
+    // goes to the left, maximumum gets change but not minimum
+    // goes to the right, minimum gets changes but not maximum
+
+    // add augmented node?
+
+    return isNodeValueInRange(root, -Infinity, Infinity);
+}
+
+const isNodeValueInRange = (node, min, max) => {
+    if (node === null) return true;
+    if (node.val < min || node.val >= max) return false;
+    const leftIsValid = isNodeValueInRange(node.left, min, node.val);
+    return leftIsValid && isNodeValueInRange(node.right, node.val, max);
+}
