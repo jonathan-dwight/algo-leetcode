@@ -258,3 +258,35 @@ const rotate = (matrix) => {
   }
   return matrix;
 }
+
+
+const enumeratePrimes = (n) => {
+    if (n <= 1) {
+        return []
+    }
+
+    // Assume that n > 2
+    const output = []
+    let i = 2;
+    while (i < n) {
+        let j = 2;
+        let isPrime = true;
+
+        // Check if i is prime
+        while (j < i) {
+            if (i % j == 0) {
+                isPrime = false;
+            }
+
+            j++;
+        }
+
+        if (isPrime) {
+            output.push(i);
+        }
+
+        i++;
+    }
+
+    return output;
+}
