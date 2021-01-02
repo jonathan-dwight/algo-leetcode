@@ -290,3 +290,38 @@ const enumeratePrimes = (n) => {
 
     return output;
 }
+
+function minRemove(arr) {
+
+    let arrHalf = Math.ceil(arr.length / 2); //3
+    let countHash = {}; // o(n) - space
+    // { 3: 1, 5: 3, 1: 2, 7: 4 }
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] in countHash) {
+            countHash[arr[i]] += 1;
+        } else {
+            countHash[arr[i]] += 1;
+        }
+    } 
+    // o(n) - time
+
+    let ans = 0;
+    let sortedArr = Object.values(countHash).sort((a, b) => b - a) // o(n log n)
+    // [1, 3, 7, -2, 4, 2]
+    // indexes = [n, 1, 2, 1, 1, n, n, 1, n, n, n....]
+    // 0, 1, 2, 3, 4, 5, 6, 7…
+
+    // negidx[n, n, 1, n, n]
+    // 0 1 2 3 4
+    // indexes[indexes.length - 1]
+    let check = 0;
+    for(let j = 0; j < sortedArr.length; j++) {
+        check += sortedArr[j];
+        ans++;
+        if(check >= arrHalf) {
+            return ans;
+        }
+    } o(n)
+
+    return ans;
+}
