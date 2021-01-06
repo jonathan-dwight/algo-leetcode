@@ -325,3 +325,40 @@ function minRemove(arr) {
 
     return ans;
 }
+
+const validSudoku = (board) => {
+  // row: 'r(v)'
+  // col: '(v)c'
+  // box: 'r(v)c' -- (0,2)
+  
+  // takes in 2D array
+  
+  // we want to use lookups - use a map object
+  
+  // 0,1,2 = 0
+  // 3,4,5 = 1
+  // 6,7,8 = 2
+  
+  let seen = {};
+  
+  for (let row = 0; row < 9; row++) {
+    for (let col = 0; col < 9; col++) {
+      let v = board[r][c];
+      if (v !== 0) {
+        const r = `row + (${v})`;
+        const c = `(${v}) + col`;
+        const box = `(r/3) + (${v}) + (c/3)`;
+        if (r in seen || c in seen || box in seen) {
+          return false;
+        }
+      
+        seen[r] = true;
+        seen[c] = true;
+        seen[box] = true;
+      }
+      
+    }
+  }
+  
+  return true
+}
