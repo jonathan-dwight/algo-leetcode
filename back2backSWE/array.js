@@ -41,25 +41,25 @@ const findTwoSum = (root, A, threeSumArr) => {
 } 
 
 
-const enumeratePrimes = (n) => {
-    let ans = [];
+// const enumeratePrimes = (n) => {
+//     let ans = [];
 
-    for (let i = 0; i < n; i++) {
-        if (isPrime(i)) ans.push(i);
-    }
+//     for (let i = 0; i < n; i++) {
+//         if (isPrime(i)) ans.push(i);
+//     }
 
-    return ans;
-}
+//     return ans;
+// }
 
-const isPrime = (num) => {
-    if (num < 2) return false;
+// const isPrime = (num) => {
+//     if (num < 2) return false;
 
-    for (let i = 0; i < num; i++) {
-        if (num % i === 0) return false;
-    }
+//     for (let i = 0; i < num; i++) {
+//         if (num % i === 0) return false;
+//     }
 
-    return true;
-}
+//     return true;
+// }
 
 
 const contiguousSubstrings = (start, end) => {
@@ -362,3 +362,73 @@ const validSudoku = (board) => {
   
   return true
 }
+
+
+const heightChecker = (array) => {
+    // would have to check if the number is minimum
+
+    // let minNumber = array[0];
+    let sortedArray = array.sort();
+
+    let count = 0;
+
+    for (let i = 0; i < array.length; i++) {
+        if (sortedArray[array[i]] !== array[i]) {
+            count += 1;
+        } 
+    }
+
+    return count;
+}
+
+console.log(heightChecker([3,1,2]))
+
+
+const sunsetView = (buildings, direction) => {
+    // if east -- anything lest than it
+    // if west -- anything greater than it
+
+    let arr = [];
+
+    // let check = new Array(buildings.length).fill(false)
+    for (let i = 0; i < buildings.length; i++) {
+        let west = i - 1;
+        let east = i + 1;
+
+        if (direction === "EAST") {
+            while (east < buildings.length) {
+                if (buildings[i] <= buildings[east]) {
+                    break
+                }
+                if (east === buildings.length - 1) {
+                    arr.push(i);
+                }
+                east++;
+            }
+        }
+        if (direction === "WEST") {
+            while (west >= 0) {
+                if (buildings[i] <= buildings[west]) {
+                    break;
+                }
+                if (west === 0) {
+                    arr.push(i)
+                }
+                west--;
+            }
+
+        } 
+    }
+
+    if (direction === 'EAST') {
+        arr.push(buildings.length-1)
+        return arr
+    }
+    if (direction === 'WEST') {
+        arr.push(0)
+        return arr.sort((a,b) => b - a)
+    }
+}
+
+// peter had a while loop to check for everything after
+console.log(sunsetView([3,5,4,4,3,1,3,2], "EAST"))

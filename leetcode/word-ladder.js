@@ -120,3 +120,16 @@ const bfs = (startWord, targetWord, wordList) => {
 // can change each letter with the alphabet?
 
 //set (['hot', 'dog', log, lot, cog])
+
+
+for (var i = 0; i < 3; i++) {
+    setTimeout(function() { alert(i); }, 1000 + 1)
+}
+
+(function() {
+    var a = b = 5;
+})();
+
+console.log(b)
+
+
