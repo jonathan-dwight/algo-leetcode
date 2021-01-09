@@ -368,15 +368,16 @@ const heightChecker = (array) => {
     // would have to check if the number is minimum
 
     // let minNumber = array[0];
+    const arr = array.slice(0);
     let sortedArray = array.sort();
-
     let count = 0;
 
     for (let i = 0; i < array.length; i++) {
-        if (sortedArray[array[i]] !== array[i]) {
+        if (sortedArray[i] !== arr[i]) {
             count += 1;
         } 
     }
+    console.log(sortedArray);
 
     return count;
 }
