@@ -119,5 +119,96 @@ const length = (head) => {
 
 
 const removeKthToLastNode = (head, k) => {
+    // can't call next on null
+    // we can follow the same format as finding linkedlist cycles
+    // need to know linkedlist - and not brute force with size
+    // need to find length of window (n - k) -- the position
+
+    // make a window size - k+1 so we can keep track of previosu
+    // terminate while loop if the right.next === null
+
+    // watch out for edge cases -- make dummy node with head
+    // start right at head.next
+
+    const dummyHead = new ListNode(-1);
+    dummyHead.next = head;
+
+    let right = dummyhead.next;
+
+    while (k > 0) {
+        right = right.next;
+        k--;
+    }
+
+    let left = dummyHead;
+    while(right !== null) {
+        left = left.next;
+        right = right.next;
+    }
+
+    left.next = left.next.next;
+
+    return dummyHead.next
     
 }
+
+const rotateLinkedList = (head, k) => {
+    // want to have a strong reference of a node in the linkedList
+    // grab node in n - kth node
+    // this will the head of the node
+    // remove tail of node to rotate
+    // how are we going to get the tail of the final list?
+    // 1. get tail and list size
+    // 2. create cycle in the list
+    // if k is bigger than length we do the mod of it
+    // we just need to switch the head
+
+    if (head == null) {
+        return head;
+    }
+
+    let tail = head;
+    let size = 1;
+    while (tail.next != null) {
+        size++;
+        tail = tail.next;
+    }
+
+    k %= size;
+
+    if (k == 0) {
+        return head;
+    }
+
+    tail.next = head;
+
+    let stepsToNewTail = size - k;
+    let rotatedListTail = tail;
+    while (stepsToNewTail > 0) {
+        rotatedListTail = rotatedListTail.next;
+        stepsToNewTail--;
+    }
+
+    const rotatedListHead = rotatedListTail.next;
+    rotatedListTail.next = null;
+
+    return rotatedListHead;
+
+}
+
+var reverseList = function (head) {
+    if (head === null) return head;
+
+    let curr = head; // 1
+    let prev = null;
+    let next = null;
+
+    while (curr !== null) {
+        next = curr.next; // 2, 3, 4, 5, null
+        curr.next = prev; // null, 1, 3, 4, 5
+        prev = curr; // 1, 2, 3, 4, 5
+        curr = next; // 2, 3, 4, 5, null
+    }
+
+    return prev;
+};

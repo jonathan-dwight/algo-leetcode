@@ -433,3 +433,25 @@ const sunsetView = (buildings, direction) => {
 
 // peter had a while loop to check for everything after
 console.log(sunsetView([3,5,4,4,3,1,3,2], "EAST"))
+
+
+let matrix =
+[
+  [ 1,  2,  3, 4],
+  [ 5,  6,  7, 8],
+  [ 9, 10, 11, 12],
+  [13, 14, 15, 16]
+]
+function rotateMatrixTwice(matrix) {
+  let length = matrix.length;
+  for (let row = 0; row < Math.floor(length / 2); row++) {
+    for (let col = 0; col < length; col++) {
+      let temp = matrix[row][col];
+      matrix[row][col] = matrix[length - 1 - row][length - 1 - col];
+      matrix[length - 1 - row][length - 1 - col] = temp;
+    }
+  }
+  return matrix;
+}
+// console.log(matrix);
+// console.log(rotateMatrixTwice(matrix));
