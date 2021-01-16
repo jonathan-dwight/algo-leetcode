@@ -455,3 +455,42 @@ function rotateMatrixTwice(matrix) {
 }
 // console.log(matrix);
 // console.log(rotateMatrixTwice(matrix));
+
+
+var twoCitySchedCost = function(costs) {
+    // people are going to be half the array length
+    // has to split
+    // let maxPeople = costs.length / 2;
+    // let totalCost = 0;
+    
+    // // for (let i = 0; i < costs.length; i++) {
+    // //     costs[i].push(costs[i][0] - costs[i][1]);
+    // // }
+    // // can sort in place
+    // // let sortedCost = 
+    // costs.sort((a, b) => ((a[0] - a[1]) - (b[0]-b[1])))
+    // // console.log(sortedCost)
+    // for (let j = 0; j < sortedCost.length; j++) {
+    //     if(maxPeople > 0) {
+    //         totalCost += sortedCost[j][0];
+    //         maxPeople--;
+    //     } else {
+    //         totalCost += sortedCost[j][1];
+    //     }
+    // }
+    // return totalCost;
+
+    let maxPeople = costs.length / 2;
+    let totalCost = 0;
+
+    costs.sort((a, b) => a[0] - a[1] - (b[0] - b[1]));
+
+    for (let j = 0; j < costs.length; j++) {
+        if (j < maxPeople) {
+            totalCost += costs[j][0];
+        } else {
+            totalCost += costs[j][1];
+        }
+    }
+    return totalCost;
+};
