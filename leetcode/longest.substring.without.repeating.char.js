@@ -27,16 +27,39 @@ var lengthOfLongestSubstring = function (s) {
 
 // o(n) - solution on LeetCode;
 
-    var start = 0, maxLen = 0;
-    var map = new Map();
+    // var start = 0, maxLen = 0;
+    // var map = new Map();
 
-    for (var i = 0; i < s.length; i++) {
-        var ch = s[i];
+    // for (var i = 0; i < s.length; i++) {
+    //     var ch = s[i];
 
-        if (map.get(ch) >= start) start = map.get(ch) + 1;
-        map.set(ch, i);
+    //     if (map.get(ch) >= start) start = map.get(ch) + 1;
+    //     map.set(ch, i);
 
-        if (i - start + 1 > maxLen) maxLen = i - start + 1;
+    //     if (i - start + 1 > maxLen) maxLen = i - start + 1;
+    // }
+
+    // return maxLen;
+
+   var lengthOfLongestSubstring = function(s) {
+    let seen = new Set();
+    let max = 0;
+    let p1 = 0;
+    let p2 = 0;
+    while( p1 < s.length && p2 < s.length ) {
+      let start = s[p1];
+      let check = s[p2];
+        if (!seen.has(check)) {  
+          p2++;
+          const currLength = p2 - p1;
+          max = currLength > max ? currLength : max;
+          seen.add(check);
+        } else {
+          seen.delete(start);
+          p1++;
+        }
     }
+    return max;
+};
 
-    return maxLen;
+
