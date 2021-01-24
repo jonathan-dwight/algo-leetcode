@@ -204,10 +204,10 @@ var reverseList = function (head) {
     let next = null;
 
     while (curr !== null) {
-        next = curr.next; // 2, 3, 4, 5, null
-        curr.next = prev; // null, 1, 3, 4, 5
-        prev = curr; // 1, 2, 3, 4, 5
-        curr = next; // 2, 3, 4, 5, null
+        next = curr.next;  // 2, 3, 4, 5, null              // 2, 3, 4, 5, null
+        curr.next = prev;  // null, 1, 2, 3, 4              // null, 1, 3, 4, 5
+        prev = curr; // 1, 2, 3, 4, 5                     // 1, 2, 3, 4, 5
+        curr = next; // 2, 3, 4, 5, null                 // 2, 3, 4, 5, null
     }
 
     return prev;
