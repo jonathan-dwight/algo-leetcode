@@ -50,3 +50,25 @@ var dailyTemperatures = function (T) {
 
     return ans;
 };
+
+
+// STACK SOLUTION
+
+var dailyTemperatures = function (T) {
+    const result = new Array(T.length).fill(0);
+    const stack = []; // going to store day and temperature
+
+    for (let i = T.length - 1; i >= 0; i--) {
+        while (stack.length && T[i] >= stack[stack.length - 1][0]) {
+            stack.pop();
+        }
+        // this conditional will find a warmer day
+        if (stack.length && T[i] < stack[stack.length - 1][0]) {
+            const distance = stack[stack.length - 1][1] - i;
+            result[i] = distance;
+        }
+        stack.push([T[i], i]);
+    }
+
+    return result;
+};
