@@ -482,7 +482,4 @@ var twoCitySchedCost = function (costs) {
     return totalCost;
 };
 
-
-
-f
-
+f;
