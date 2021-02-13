@@ -482,4 +482,48 @@ var twoCitySchedCost = function (costs) {
     return totalCost;
 };
 
-f;
+const spiralOrder = (matrix) => {
+    const ans = [];
+
+    let startRow = 0;
+    let endRow = matrix.length - 1;
+
+    let startCol = 0;
+    let endCol = matrix[0].length - 1;
+
+    while (startRow <= endRow && startCol <= endCol) {
+        for (let topCol = startCol; topCol <= endCol; topCol++) {
+            ans.push(matrix[startRow][topCol]);
+        }
+
+        for (let rightRow = startRow + 1; rightRow <= endRow; rightRow++) {
+            ans.push(matrix[rightRow][endCol]);
+        }
+
+        for (let bottomCol = endCol - 1; bottomCol >= startCol; bottomCol--) {
+            if (startRow === endRow) break;
+            ans.push(matrix[endRow][bottomCol]);
+        }
+
+        for (let leftRow = endRow - 1; leftRow > startRow; leftRow--) {
+            if (startCol === endCol) break;
+            ans.push(matrix[leftRow][startCol]);
+        }
+
+        startRow++;
+        endRow--;
+        startCol++;
+        endCol--;
+        // console.log(ans);
+    }
+
+    return ans;
+};
+
+// console.log(
+//     spiralOrder([
+//         [1, 2, 3],
+//         [4, 5, 6],
+//         [7, 8, 9],
+//     ])
+// );
