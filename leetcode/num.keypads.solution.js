@@ -1,7 +1,7 @@
 let wordlist = ['APPLE', 'PLEAS', 'PLEASE'];
 let keypads = ['AELWXYZ', 'AELPXYZ', 'AELPSXY', 'SALEPRT', 'XAEBKSY'];
 
-
+// create a hash for the keypads? 
 const numKeypadSolutions = (wordlist, keyPads) => {
     let arr = [];
 
@@ -27,3 +27,25 @@ const numKeypadSolutions = (wordlist, keyPads) => {
 
 console.log(numKeypadSolutions(wordlist, keypads));
 //output = [0, 1, 3, 2, 0]
+
+const numKeypadSolutions = (wordlist, keyPads) => {
+    const results = [];
+    const newWords = wordlist.join(" ") + " ";
+    for (let i = 0; i < keypads.length; i++) {
+        const keypad = keypads[i];
+        const key = keypad[0];
+        let count = 0;
+        let charCheck = true;
+        let keyCheck = false;
+        for (let j = 0; j < newWords.length; j++) {
+            let char = newWords[j];
+            if (char === key) keyCheck = true;
+            if (char !== " " && !keypad.includes(char)) charCheck = false;
+            if (char === " " && charCheck && keyCheck) {
+                count++;
+            }
+        }
+        results.push(count);
+    }
+    return results;
+};
