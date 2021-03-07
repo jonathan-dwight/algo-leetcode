@@ -25,6 +25,39 @@ var lengthOfLongestSubstring = function (s) {
     return ans;
 };
 
+// sliding window approach
+
+var lengthOfLongestSubstring = function (s) {
+    if (s.length === 1) return 1;
+    const checkSet = new Set();
+    let max = 0;
+
+    let left = 0;
+    let right = 0;
+
+    while (left < s.length) {
+        let leftChar = s[left];
+        let rightChar = s[right];
+        if (checkSet.has(rightChar) || right === s.length - 1) {
+            checkSet.add(rightChar);
+            left++;
+            right = left;
+            if (max < checkSet.size) max = checkSet.size;
+            checkSet.clear();
+            continue;
+        } else {
+            checkSet.add(rightChar);
+            right++;
+        }
+    }
+
+    if (max < checkSet.size) max = checkSet.size;
+    return max;
+};
+
+
+
+
 // o(n) - solution on LeetCode;
 
     // var start = 0, maxLen = 0;
