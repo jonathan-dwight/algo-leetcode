@@ -57,3 +57,40 @@ var flatten = function (head) {
 //     }
 //     return arr;
 // }
+
+const flatten = (head) => {
+    const stack = [];
+    
+    let linkedList = head;
+    
+    while (linkedList != null) {
+        
+        if (linkedList.child) {
+            if (linkedList.next != null) stack.push(linkedList.next);
+            linkedList.next = linkedList.child;
+            linkedList.next.prev = linkedList;
+            linkedList.child = null;
+        }
+        
+        if (linkedList.next === null && stack.length > 0) {
+            const node = stack.pop();
+            linkedList.next = node;
+            linkedList.next.prev = linkedList;
+        }
+        
+        linkedList = linkedList.next;
+    }
+    
+    return head;
+}
+
+/*
+
+iterate and when a child set the next to equal 
+    push into a stack the next link
+    and set the child prev to the parent
+    
+    if we hit a null -> we pop of the node and then it sets the next to the node
+    
+    we have to continue worrying about the doubly linkedlist and make sure to set it back to the parent
+*/
