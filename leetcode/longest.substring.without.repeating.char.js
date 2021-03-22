@@ -25,7 +25,8 @@ var lengthOfLongestSubstring = function (s) {
     return ans;
 };
 
-// sliding window approach
+// sliding window approach - it would be o(n) for both time and space
+// its because the i and j could be 2 * n
 
 var lengthOfLongestSubstring = function (s) {
     if (s.length === 1) return 1;
